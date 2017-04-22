@@ -29,15 +29,15 @@ class App extends React.Component {
         data:[],
 
         type:0,
-        firstname:'a',
-        lastname:'b',
+        firstname:'',
+        lastname:'',
         birthdate:'',
-        num: 0,
+        num:0,
         salary:0,
         building:0,
         floor:0,
         office:0,
-        client:'c'
+        client:''
       }
       this.addItem = this.addItem.bind(this);
       this.removeItem = this.removeItem.bind(this);
@@ -45,7 +45,7 @@ class App extends React.Component {
    }
 
 setValue(e){
-  switch(e.target.name)
+  switch(e.target.id)
   {
     case "firstname":
       this.setState({firstname: e.target.value});
@@ -82,10 +82,8 @@ setValue(e){
       this.setState({rmindex: e.target.value});
       break;
   }
-  console.log(this.state)
 }
    addItem(){
-   console.log(this.state)
     var count = this.state.id + 1
     this.setState({id: count});
     this.setState({type: 2});
@@ -105,36 +103,50 @@ setValue(e){
       return (
          <div>
             <Header/>
-            <form>
-                <label>
-                  Developer
-                  <input type="checkbox"  />
-                  Project Manager
-                  <input type="checkbox"  />
-                  Sales Person
-                  <input type="checkbox"  />
-                </label>
+                  <label htmlFor="a">Developer </label>
+                  <input type="radio" name="type" id="a" />
+                  <label htmlFor="b">Project Manager </label>
+                  <input type="radio" name="type" id="b"  />
+                  <label htmlFor="c">Sales Person </label>
+                  <input type="radio" name="type" id="c"  />
                 <br />
-                <label>
-                  <input type="text" name="firstname" value={this.state.firstname} onChange={this.setValue} />
-                  <input type="text" name="lastname" value={this.state.lastname} onChange={this.setValue} />
-                  <input type="date" name="birthdate" value={this.state.birthdate} onChange={this.setValue} />
-                  <input type="number" name="num" value={this.state.num} onChange={this.setValue} />
-                  <input type="number" name="salary" value={this.state.salary} onChange={this.setValue} />
-                  <input type="number" name="building" value={this.state.building} onChange={this.setValue} />
-                  <input type="number" name="floor" value={this.state.floor} onChange={this.setValue} />
-                  <input type="number" name="office" value={this.state.office} onChange={this.setValue} />
-                  <input type="text" name="client" value={this.state.client} onChange={this.setValue} />
-                  <button onClick = {this.addItem}>ADD</button>
-                </label>
                 <br />
-                <label>
+                  <label htmlFor="firstname">First Name: </label>
+                  <input type="text" name="employee" id="firstname" value={this.state.firstname} onChange={this.setValue} />
+                  <label htmlFor="lastname">Last Name: </label>
+                  <input type="text" name="employee" id="lastname" value={this.state.lastname} onChange={this.setValue} />
+                  <label htmlFor="birthdate">Birth Date: </label>
+                  <input type="date" name="employee" id="birthdate" value={this.state.birthdate} onChange={this.setValue} />
+                  <label htmlFor="num">Number of Employees: </label>
+                  <input type="number" name="employee" id="num" value={this.state.num} onChange={this.setValue} />
+                  <label htmlFor="salary">Salary: </label>
+                  <input type="number" name="employee" id="salary" value={this.state.salary} onChange={this.setValue} />
+                  <label htmlFor="building">Building: </label>
+                  <input type="number" size = "4" name="employee" id="building" value={this.state.building} onChange={this.setValue} />
+                  <label htmlFor="floor">Floor: </label>
+                  <input type="number" name="employee" id="floor" value={this.state.floor} onChange={this.setValue} />
+                  <label htmlFor="office">Office: </label>
+                  <input type="number" name="employee" id="office" value={this.state.office} onChange={this.setValue} />
+                  <label htmlFor="client">Client Name: </label>
+                  <input type="text" name="employee" id="client" value={this.state.client} onChange={this.setValue} />
+                  <input type="submit" onClick = {this.addItem} />
+                <br />
                   <input type="text" name="rmindex" value={this.state.rmindex} onChange={this.setValue} />
-                  <button onClick = {this.removeItem}>DELETE</button>
-                </label>
-            </form>
+                  <button type="submit" onClick = {this.removeItem}>DELETE</button>
             <table>
                <tbody>
+               <tr>
+                   <td>ID</td>
+                   <td>First Name</td>
+                   <td>Last Name</td>
+                   <td>Birth Date</td>
+                   <td>Num of Employees</td>
+                   <td>Salary</td>
+                   <td>Building</td>
+                   <td>Floor</td>
+                   <td>Office</td>
+                   <td>Client Name</td>
+               </tr>
                   {this.state.data.map((person, i) => <TableRow key = {i} data = {person} />)}
                </tbody>
             </table>
@@ -158,8 +170,15 @@ class TableRow extends React.Component {
       return (
          <tr>
             <td>{this.props.data.id}</td>
-            <td>{this.props.data.name}</td>
-            <td>{this.props.data.age}</td>
+            <td>{this.props.data.firstname}</td>
+            <td>{this.props.data.lastname}</td>
+            <td>{this.props.data.birthdate}</td>
+            <td>{this.props.data.num}</td>
+            <td>{this.props.data.salary}</td>
+            <td>{this.props.data.building}</td>
+            <td>{this.props.data.floor}</td>
+            <td>{this.props.data.office}</td>
+            <td>{this.props.data.client}</td>
          </tr>
       );
    }
